@@ -1,5 +1,6 @@
 package com.sanjay.jobtracker.service;
 
+import com.sanjay.jobtracker.dto.DashboardResponseDto;
 import com.sanjay.jobtracker.exception.JobApplicationNotFoundException;
 import com.sanjay.jobtracker.model.JobApplication;
 import com.sanjay.jobtracker.repository.JobApplicationRepository;
@@ -56,5 +57,23 @@ public class JobApplicationService {
 
     public List<JobApplication> getJobApplicationsByStatus(String status) {
         return jobApplicationRepository.findByApplicationStatus(status);
+    }
+
+    public DashboardResponseDto getDashboardData() {
+        long total = jobApplicationRepository.count();
+        long applied = jobApplicationRepository.countByApplicationStatus("APPLIED");
+        long interview = jobApplicationRepository.countByApplicationStatus("INTERVIEW");
+        long offer = jobApplicationRepository.countByApplicationStatus("OFFER");
+        long rejected = jobApplicationRepository.countByApplicationStatus("REJECTED");
+        long saved = jobApplicationRepository.countByApplicationStatus("SAVED");
+
+        return new DashboardResponseDto(
+                total,
+                applied,
+                interview,
+                offer,
+                rejected,
+                saved
+        );
     }
 }

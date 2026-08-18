@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface JobApplicationRepository extends JpaRepository<JobApplication, Integer> {
     List<JobApplication> findByApplicationStatus(String applicationStatus);
+
+    long countByApplicationStatus(String applicationStatus);
 }

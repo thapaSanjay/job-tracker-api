@@ -1,5 +1,6 @@
 package com.sanjay.jobtracker.controller;
 
+import com.sanjay.jobtracker.dto.DashboardResponseDto;
 import com.sanjay.jobtracker.model.JobApplication;
 import com.sanjay.jobtracker.service.JobApplicationService;
 import jakarta.validation.Valid;
@@ -47,5 +48,10 @@ public class JobApplicationController {
     @GetMapping("/status/{status}")
     public List<JobApplication> getJobApplicationsByStatus(@PathVariable String status) {
         return jobApplicationService.getJobApplicationsByStatus(status);
+    }
+
+    @GetMapping("/dashboard")
+    public DashboardResponseDto getDashboardData() {
+        return jobApplicationService.getDashboardData();
     }
 }
